@@ -29,9 +29,8 @@ export const getTeamLeaders =  async (req, res,next) => {
 };
 
 export const createEmpleado = async (req, res, next) => {
-  const {id,name,edad,id_departamento,id_roles} = req.body;
   try {
-   const result = await empleadoService.createEmpleado(id,name,edad,id_departamento,id_roles);
+  const result = await empleadoService.createEmpleado(req.body);
        res.status(201).json({result});
   }  catch (error) {
       next(error);

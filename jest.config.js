@@ -1,4 +1,4 @@
 export default {
   testEnvironment: 'node',
-  clearMocks: true
+  setupFiles: ["<rootDir>/jest.setup.js"]
 };

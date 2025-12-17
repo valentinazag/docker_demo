@@ -11,9 +11,26 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
+    
+  db_test:
+    image: postgres:16
+    container_name: pruebaDB_test
+    environment:
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: admin
+        POSTGRES_DB: pruebaDB_test
+    ports:
+        - "5433:5432"
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+      - ./init_test.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+ 
 
   node-app:
     build:
@@ -38,6 +55,7 @@ services:
 
 volumes:
   postgres_data:
+  postgres_data_test:
 
 
 networks:
